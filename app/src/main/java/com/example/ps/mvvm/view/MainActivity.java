@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.ps.mvvm.R;
 import com.example.ps.mvvm.databinding.ActivityMainBinding;
 import com.example.ps.mvvm.viewmodel.UserViewModel;

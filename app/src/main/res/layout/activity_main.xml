@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             tools:listitem="@layout/user_row"
-            bind:recyclerBinder="@{user.userViewModelsList}">
+            bind:recyclerBinder="@{user.mutableUserViewModelList}">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -58,7 +58,7 @@
             android:layout_height="150dp"
             android:layout_marginTop="50dp"
             tools:listitem="@layout/user_row"
-            bind:recyclerBinder="@{user.userViewModelsList}"/>
+            bind:recyclerBinder="@{user.mutableUserViewModelList}"/>
 
     </LinearLayout>
 
