@@ -49,7 +49,7 @@ public class UserViewModel extends BaseObservable {
         Login login = new Login();
         login.setEmail("eve.holt@reqres.in");
         login.setPassword("pistol");
-        repository.loginUser(login);
+        repository.loginUser(login, context);
     }
 
     @Bindable
@@ -99,6 +99,8 @@ public class UserViewModel extends BaseObservable {
             }
             mutableUserViewModelList.postValue(userViewModelsList);
         });
+
+        repository.createUser("morpheus", "leader", context);
 
 
 //        for (int i = 0; i < 10; i++) {

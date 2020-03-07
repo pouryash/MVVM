@@ -1,9 +1,12 @@
 package com.example.ps.mvvm.remote.User;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.ps.mvvm.model.CreatedUser;
 import com.example.ps.mvvm.model.Login;
 import com.example.ps.mvvm.model.Token;
 import com.example.ps.mvvm.remote.Api;
@@ -52,7 +55,7 @@ public class UserRepository {
 
     }
 
-    public void loginUser(Login login) {
+    public void loginUser(Login login, Context context) {
 
         Api api = RetrofitBuilder.getRetrofit();
 
@@ -63,7 +66,28 @@ public class UserRepository {
                 .subscribe(new SingleSubscriber<Token>() {
                     @Override
                     public void onSuccess(Token token) {
-                        int a = 0;
+                        Toast.makeText(context, "login successful", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                });
+
+    }
+
+    public void createUser(String name, String job, Context context) {
+
+        Api api = RetrofitBuilder.getRetrofit();
+
+        api.postCreateUser(name, job)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleSubscriber<CreatedUser>() {
+                    @Override
+                    public void onSuccess(CreatedUser user) {
+                        Toast.makeText(context, "user successfully create", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
