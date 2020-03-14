@@ -16,7 +16,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 import rx.Single;
-import rx.subjects.Subject;
+
 
 public interface Api {
 

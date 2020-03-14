@@ -87,7 +87,7 @@ public class UserRepository {
                 .subscribe(new SingleSubscriber<CreatedUser>() {
                     @Override
                     public void onSuccess(CreatedUser user) {
-                        Toast.makeText(context, "user successfully create", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "user successfully create", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
