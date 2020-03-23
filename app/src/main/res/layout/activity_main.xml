@@ -8,7 +8,7 @@
             type="com.example.ps.mvvm.viewmodel.UserViewModel" />
 
     </data>
-// test
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
