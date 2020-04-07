@@ -12,8 +12,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.MergeAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.ps.mvvm.adapter.UserAdapter;
+import com.example.ps.mvvm.adapter.UserAdapter2;
 import com.example.ps.mvvm.model.Login;
 import com.example.ps.mvvm.model.User;
 import com.example.ps.mvvm.remote.User.UserRepository;
@@ -43,7 +46,7 @@ public class UserViewModel extends BaseObservable {
         return adapter;
     }
 
-    public void login(){
+    public void login() {
 
         UserRepository repository = new UserRepository();
         Login login = new Login();
@@ -72,14 +75,21 @@ public class UserViewModel extends BaseObservable {
 
         List<UserViewModel> userViewModelList1 = new ArrayList<>();
 
-            UserAdapter adapter = new UserAdapter(userViewModelList1);
-            recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
-            recyclerView.setAdapter(adapter);
+        MergeAdapter.Config.Builder config = new MergeAdapter.Config.Builder();
+        config.setIsolateViewTypes(true);
+        UserAdapter adapter = new UserAdapter(userViewModelList1);
+        UserAdapter2 adapter2 = new UserAdapter2(userViewModelList1);
+        MergeAdapter mergeAdapter = new MergeAdapter(config.build(), adapter, adapter2);
+        mergeAdapter.addAdapter(adapter);
+        mergeAdapter.addAdapter(adapter2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(mergeAdapter);
 
         userViewModelList.observe((LifecycleOwner) recyclerView.getContext(), userViewModellist -> {
             userViewModelList1.clear();
             userViewModelList1.addAll(userViewModellist);
             adapter.notifyDataSetChanged();
+            adapter2.notifyDataSetChanged();
         });
 
     }
@@ -92,7 +102,7 @@ public class UserViewModel extends BaseObservable {
         UserRepository repository = new UserRepository();
         repository.getUsers();
         repository.getUsers();
-        repository.getUserMutableLiveData().observe((LifecycleOwner)context, user -> {
+        repository.getUserMutableLiveData().observe((LifecycleOwner) context, user -> {
             for (int i = 0; i < user.size(); i++) {
                 UserViewModel userViewModel = new UserViewModel(user.get(i));
                 userViewModelsList.add(userViewModel);
